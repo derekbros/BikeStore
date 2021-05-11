@@ -1,0 +1,68 @@
+﻿@page "/admin/bikes"
+@page "/admin"
+@inherits OwningComponentBase<IAgencyRepository>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>BikeId</th>
+            <th>Size</th>
+            <th>Location</th>
+            <th>RateId</th>
+            <td />
+        </tr>
+    </thead>
+    <tbody>
+        @if (BikeData?.Count() > 0)
+        {
+            @foreach (Bike b in BikeData)
+            {
+                <tr>
+                    <td>@b.BikeId</td>
+                    <td>@b.Size</td>
+                    <td>@b.Location</td>
+                    <td>@b.RateId.ToString("c")</td>
+                    <td>
+                        <NavLink class="btn btn-info btn-sm"
+                                 href="@GetDetailsUrl(b.BikeId)">
+                            Details
+                        </NavLink>
+                        <NavLink class="btn btn-warning btn-sm"
+                                 href="@GetEditUrl(b.BikeId)">
+                            Edit
+                        </NavLink>
+                        <button class="btn btn-danger btn-sm" 
+                                @onclick="@(e => DeleteBike(b))">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No Bikes</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<NavLink class="btn btn-primary" href="/admin/bikes/create">Create</NavLink>
+@code {
+    public IAgencyRepository Repository => Service;
+    public IEnumerable<Bike> BikeData { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+       await UpdateData();
+    }
+    public async Task UpdateData()
+    {
+          BikeData = await Repository.Bike.ToListAsync();
+    }
+    public async Task DeleteBike(Bike b)
+    {
+       await Repository.DeleteBike(b.BikeId);
+       await UpdateData();
+    }
+    public string GetDetailsUrl(long id) => $"/admin/bikes/details/{id}";
+    public string GetEditUrl(long id) => $"/admin/bikes/edit/{id}";
+}

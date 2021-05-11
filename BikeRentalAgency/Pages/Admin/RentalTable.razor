@@ -1,0 +1,54 @@
+﻿@using BikeStoreApi.Repositories
+@using BikeAgencyLibrary
+@using Microsoft.AspNetCore.Components.Routing
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr><th colspan="5" class="text-center">@TableTitle</th></tr>
+    </thead>
+    <tbody>
+        @if (Rentals?.Count() > 0)
+        {
+            @foreach (Rental r in Rentals)
+            {
+                <tr>
+                    <td>@r.CustId</td>
+                    <td>@r.BikeId</td>
+                    <td>@r.RateId</td>
+                    <td>@r.PaymentStatusCode</td>
+                    <td>@r.BookedStartDateTime</td>
+                    <td>@r.BookedEndDateTime</td>
+                    <th>Quantity</th>
+                    <td>
+                        <button class="btn btn-sm btn-danger"
+                                @onclick="@(e => RentalSelected.InvokeAsync(r.RentalId))">
+                            @ButtonLabel
+                        </button>
+                    </td>
+                </tr>
+                @foreach (CartLine line in r.Lines)
+                {
+                    <tr>
+                        <td colspan="2"></td>
+                        <td>@line.Bike.BikeId</td>
+                        <td>@line.Quantity</td>
+                        <td></td>
+                    </tr>
+                }
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" class="text-center">No Rentals</td></tr>
+        }
+    </tbody>
+</table>
+@code {
+    [Parameter]
+    public string TableTitle { get; set; } = "Rentals";
+    [Parameter]
+    public IEnumerable<Rental> Rentals { get; set; }
+    [Parameter]
+    public string ButtonLabel { get; set; } = "Pay";
+    [Parameter]
+    public EventCallback<int> RentalSelected { get; set; }
+}

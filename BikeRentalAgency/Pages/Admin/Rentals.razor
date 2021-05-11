@@ -1,0 +1,37 @@
+﻿@page "/admin/rentals"
+@page "/admin"
+@using BikeStoreApi.Repositories
+@using BikeAgencyLibrary
+@using Microsoft.AspNetCore.Components.Routing
+@inherits OwningComponentBase<IAgencyRepository>
+
+
+<RentalTable TableTitle="Unpaid Rentals"
+             Rentals="UnpaidRentals" ButtonLabel="Pay" RentalSelected="PayRental" />
+<RentalTable TableTitle="Paid Rentals"
+             Rentals="PaidRentals" ButtonLabel="Reset" RentalSelected="ResetRental" />
+<button class="btn btn-info" @onclick="@(e => UpdateData())">Refresh Data</button>
+@code {
+    public IAgencyRepository Repository => Service;
+    public IEnumerable<Rental> AllRentals { get; set; }
+    public IEnumerable<Rental> UnpaidRentals { get; set; }
+    public IEnumerable<Rental> PaidRentals { get; set; }
+    protected  override void OnInitialized()
+    {
+        UpdateData();
+    }
+    public void UpdateData()
+    {
+        AllRentals = Repository.Rentals.ToList();
+        UnpaidRentals = AllRentals.Where(r => !r.PaymentStatusCode);
+        PaidRentals = AllRentals.Where(r => r.PaymentStatusCode);
+    }
+    public void PayRental(int id) => UpdateRental(id, true);
+    public void ResetRental(int id) => UpdateRental(id, false);
+    private void UpdateRental(int id, bool paymentStatus)
+    {
+        Rental r = Repository.Rentals.FirstOrDefault(r => r.RentalId == id);
+        r.PaymentStatusCode = paymentStatus;
+        Repository.SaveRental(r);
+    }
+}

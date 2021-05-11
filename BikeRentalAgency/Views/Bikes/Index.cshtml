@@ -1,0 +1,43 @@
+﻿@model RentalsListViewModel
+@{ViewData["Title"] = "Bikes";
+}
+<h2>Bikes</h2>
+<table>
+    <tr>
+        <th>
+            Type
+        </th>
+        <th>
+            BikeId
+        </th>
+        <th>
+            Rate
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Size
+        </th>
+    </tr>
+    @foreach (var item in Model.Bikes) 
+            { 
+            <tr>
+                <th>
+                    @item.Type
+                </th>
+                <th>
+                    @item.BikeId
+                </th>
+                <th>
+                    @item.Rate.HourlyRate
+                </th>
+                <th>
+                    @item.Location
+                </th>
+                <th>
+                    @item.Size
+                </th>
+            </tr>
+            }
+</table>
