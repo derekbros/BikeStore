@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using BikeStoreApi.Models;
-
+using BikeRentalAgency.Repositories;
 namespace BikeRentalAgency
 {
     public class Startup
@@ -29,8 +29,8 @@ namespace BikeRentalAgency
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddTransient<IAgencyRepository, EFAgencyRepository>();
-            //services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddTransient<IBikeRentalRepository, BikeRentalRepository>();
+           // services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Identity"]));

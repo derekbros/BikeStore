@@ -5,38 +5,38 @@
 <table>
     <tr>
         <th>
-            Type
+            TypeId
         </th>
         <th>
             BikeId
         </th>
         <th>
-            Rate
+            RateId
         </th>
         <th>
             Location
         </th>
         <th>
-            Size
+            FeatureId
         </th>
     </tr>
     @foreach (var item in Model.Bikes) 
             { 
             <tr>
                 <th>
-                    @item.Type
+                    @item.TypeId
                 </th>
                 <th>
                     @item.BikeId
                 </th>
                 <th>
-                    @item.Rate.HourlyRate
+                    @item.RateId
                 </th>
                 <th>
                     @item.Location
                 </th>
                 <th>
-                    @item.Size
+                    @item.FeatureId
                 </th>
             </tr>
             }

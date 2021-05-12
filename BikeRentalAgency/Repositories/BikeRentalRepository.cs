@@ -14,7 +14,7 @@ namespace BikeRentalAgency.Repositories
 {
     public class BikeRentalRepository : IBikeRentalRepository
     {
-        private string baseUrl = "https://localhost:44305/api/";
+        private string baseUrl = "http://localhost:50417/api/";
         public BikeRentalRepository()
         {
             this.GetAllBikes();
