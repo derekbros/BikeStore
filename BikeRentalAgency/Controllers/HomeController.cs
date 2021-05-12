@@ -1,37 +1,35 @@
-using BikeRentalAgency.Models.ViewModels;
-using BikeAgencyLibrary;
-using BikeStoreApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+using System.Diagnostics;
+using Microsoft.Extensions.Logging;
+using BikeRentalAgency.Models;
 
-namespace SportsStore.Controllers
+namespace BikeRentalAgency.Controllers
 {
+    
     public class HomeController : Controller
     {
-        private readonly IAgencyRepository repository;
-        public int PageSize = 4;
-        public HomeController(IAgencyRepository repo)
-        {
-            repository = repo;
-        }
-        public IActionResult Index(int productPage = 1)
+        private readonly ILogger<HomeController> _logger;
 
+        public HomeController(ILogger<HomeController> logger)
         {
-            var model = new RentalsListViewModel
-            {
-                Bikes = (System.Collections.Generic.IList<Bike>)repository.Bike
-        .OrderBy(p => p.BikeId)
-        .Skip((productPage - 1) * PageSize)
-        .Take(PageSize),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = productPage,
-                    ItemsPerPage = PageSize,
-                    TotalItems = repository.Bike.Count()
-                }
-            };
-            return View(model);
+            _logger = logger;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
+
