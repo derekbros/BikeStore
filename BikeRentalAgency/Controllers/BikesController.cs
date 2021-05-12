@@ -28,6 +28,16 @@ namespace BikeRentalAgency.Controllers
         //    List<Bike> bike = new List<Bike>();
         //    bike = b.
         //}
+        public IActionResult Details(int? id)
+        {
+
+            return View();    
+                }
+
+        public IActionResult Edit(int? id)
+        {
+            return View();
+        }
         public IActionResult Reserve(int? id)
         {
             return View();

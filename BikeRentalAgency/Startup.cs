@@ -30,7 +30,6 @@ namespace BikeRentalAgency
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IBikeRentalRepository, BikeRentalRepository>();
-           // services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:Identity"]));
