@@ -38,3 +38,5 @@ namespace BikeAgencyLibrary
 
         [NotMapped]
         public virtual BikeType Type { get; set; }
+    }
+}
