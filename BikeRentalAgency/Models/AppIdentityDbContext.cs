@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BikeAgencyLibrary.Models
+namespace BikeRentalAgency.Models
 {
 
     public class AppIdentityDbContext : IdentityDbContext<IdentityUser>

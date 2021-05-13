@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using BikeAgencyLibrary;
+
+using BikeAgencyLibrary.Models;
 
 namespace BikeStoreApi.Models
 {

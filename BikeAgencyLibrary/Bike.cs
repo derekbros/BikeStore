@@ -27,6 +27,7 @@ namespace BikeAgencyLibrary
         public long ShopId { get; set; }
         public Shop Shop { get; set; }
 
+        [NotMapped ]
         public BikeType BikeType { get; set; }
 
         public virtual SpecialFeature Feature { get; set; }
@@ -38,3 +39,5 @@ namespace BikeAgencyLibrary
 
         [NotMapped]
         public virtual BikeType Type { get; set; }
+    }
+}

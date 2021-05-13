@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using BikeRentalAgency.Models;
+using BikeStoreApi.Repositories;
 
 namespace BikeRentalAgency.Controllers
 {
@@ -14,7 +15,6 @@ namespace BikeRentalAgency.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
             return View();
