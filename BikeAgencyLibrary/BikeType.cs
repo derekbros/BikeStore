@@ -12,6 +12,8 @@ namespace BikeAgencyLibrary
         public int BikeTypeId { get; set; }
         public string BikeTypeName { get; set; }
 
+        public IEnumerable<Bike> Bikes { get; set; }
+
         [NotMapped]
         public virtual Bike Bike { get; set; }
     }
